@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Ignore Spelling: sql
+
+using Dapper;
+using System.Data;
+using System.Data.SQLite;
 
 namespace SilverSocialNetwork.DAL.Repositories
 {
@@ -37,7 +37,7 @@ namespace SilverSocialNetwork.DAL.Repositories
 
         private IDbConnection CreateConnection()
         {
-            return new SQLiteConnection("Data Source = DAL/DB/social_network.db; Version = 3");
+            return new SQLiteConnection("Data Source = DAL/DB/social_network_bd.db; Version = 3");
         }
     }
 }
