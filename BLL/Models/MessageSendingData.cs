@@ -10,7 +10,7 @@ namespace SilverSocialNetwork.BLL.Models
     {
         public int SenderId { get; set; }
 
-        public string Conttnt { get; set; }
+        public string Content { get; set; }
 
         public string RecipientEmail { get; set; }
     }

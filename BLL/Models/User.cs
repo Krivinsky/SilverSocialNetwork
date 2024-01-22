@@ -17,6 +17,9 @@ namespace SilverSocialNetwork.BLL.Models
         public string FavoriteMovie { get; set; }
         public string FavoriteBook { get; set; }
 
+        public IEnumerable<Message> IncomingMessages { get; }
+        public IEnumerable<Message> OutgoingMessages { get; }
+
         public User(
             int id,
             string firstName,
@@ -25,7 +28,10 @@ namespace SilverSocialNetwork.BLL.Models
             string email,
             string photo,
             string favoriteMovie,
-            string favoriteBook)
+            string favoriteBook,
+            IEnumerable<Message> incomingMessages,
+            IEnumerable<Message> outgoingMessages)
+
         {
             this.Id = id;
             this.FirstName = firstName;
@@ -35,6 +41,8 @@ namespace SilverSocialNetwork.BLL.Models
             this.Photo = photo;
             this.FavoriteMovie = favoriteMovie;
             this.FavoriteBook = favoriteBook;
+            this.IncomingMessages = incomingMessages;
+            this.OutgoingMessages = outgoingMessages;
         }
     }
 }
