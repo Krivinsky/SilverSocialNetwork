@@ -10,7 +10,6 @@ namespace SilverSocialNetwork
         static void Main()
         {
             Console.WriteLine("\t\t**** Welcome to SilverSocialNetwork *****\n");
-            //Console.WriteLine("для выхода вв");
             while (true)
             {
                 Console.WriteLine("Войти в профиль (нажмите 1)");
@@ -107,7 +106,7 @@ namespace SilverSocialNetwork
                         }
 
                     case "2":
-                        {
+                    {
                             var userRegistrationData = new UserRegistrationData();
 
                             Console.WriteLine("Для создания нового профиля введите ваше имя:");
@@ -140,7 +139,7 @@ namespace SilverSocialNetwork
                             }
 
                             break;
-                        }
+                    }
                 }
             }
         }
