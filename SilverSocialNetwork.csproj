@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <None Update="DAL\DB\social_network_bd.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

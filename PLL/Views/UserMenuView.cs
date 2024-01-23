@@ -25,7 +25,7 @@ namespace SilverSocialNetwork.PLL.Views
 
                 Console.WriteLine("Просмотреть информацию о моём профиле (нажмите 1)");
                 Console.WriteLine("Редактировать мой профиль (нажмите 2)");
-                Console.WriteLine("Добавить в друзья (нажмите 3)");
+                Console.WriteLine("Добавить в друзья или удалить из друзей (нажмите 3)");
                 Console.WriteLine("Написать сообщение (нажмите 4)");
                 Console.WriteLine("Просмотреть входящие сообщения (нажмите 5)");
                 Console.WriteLine("Просмотреть исходящие сообщения (нажмите 6)");
@@ -50,9 +50,9 @@ namespace SilverSocialNetwork.PLL.Views
 
                     case "3":
                         {
-
+                            Program.friendView.Show(user);
+                            break;
                         }
-                        break;
 
                     case "4":
                         {

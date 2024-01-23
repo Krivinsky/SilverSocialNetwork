@@ -2,12 +2,7 @@
 using SilverSocialNetwork.BLL.Models;
 using SilverSocialNetwork.DAL.Entities;
 using SilverSocialNetwork.DAL.Repositories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SilverSocialNetwork.BLL.Services
 {
@@ -15,10 +10,17 @@ namespace SilverSocialNetwork.BLL.Services
     {
         MessageService messageService;
         IUserRepository userRepository;
+        
         public UserService() 
         {
             userRepository = new UserRepository();
             messageService = new MessageService();
+        }
+
+        public UserService (MessageService messageService, IUserRepository userRepository)
+        {
+            this.messageService = messageService;
+            this.userRepository = userRepository;
         }
 
         public void Register(UserRegistrationData userRegistrationData) 
@@ -50,7 +52,6 @@ namespace SilverSocialNetwork.BLL.Services
                 lastname = userRegistrationData.LastName,
                 password = userRegistrationData.Password,
                 email = userRegistrationData.Email,
-
             };
 
             if (this.userRepository.Create(userEntity) == 0)
@@ -60,7 +61,7 @@ namespace SilverSocialNetwork.BLL.Services
         public User Authenticate(UserAuthenticationData userAuthenticationData)
         {
             var findUserEntity = userRepository.FindByEmail(userAuthenticationData.Email);
-            if (findUserEntity is null) throw new UserNotFoundException();
+            if (findUserEntity is null) throw new UserNotFoundException("Пользователь с таким почтовым адресом не найден");
 
             if (findUserEntity.password != userAuthenticationData.Password)
                 throw new WrongPasswordException();
@@ -71,7 +72,7 @@ namespace SilverSocialNetwork.BLL.Services
         public User FindByEmail(string email)
         {
             var findUserEntity = userRepository.FindByEmail(email);
-            if (findUserEntity is null) throw new UserNotFoundException();
+            if (findUserEntity is null) throw new UserNotFoundException("Пользователь с таким почтовым адресом не найден");
 
             return ConstructUserModel(findUserEntity);
         }
@@ -79,7 +80,7 @@ namespace SilverSocialNetwork.BLL.Services
         public User FindById(int id)
         {
             var findUserEntity = userRepository.FindById(id);
-            if (findUserEntity is null) throw new UserNotFoundException();
+            if (findUserEntity is null) throw new UserNotFoundException("Пользователь с таким ID не найден");
 
             return ConstructUserModel(findUserEntity);
         }
@@ -107,7 +108,7 @@ namespace SilverSocialNetwork.BLL.Services
             var incomingMessages = messageService.GetIncomingMessagesByUserId(userEntity.id);
 
             var outgoingMessages = messageService.GetOutcomingMessagesByUserId(userEntity.id);
-            
+
             return new User(userEntity.id,
                           userEntity.firstname,
                           userEntity.lastname,
@@ -117,7 +118,8 @@ namespace SilverSocialNetwork.BLL.Services
                           userEntity.favorite_movie,
                           userEntity.favorite_book,
                           incomingMessages,
-                          outgoingMessages);
+                          outgoingMessages
+                          );
         }
 
     }

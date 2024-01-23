@@ -18,6 +18,8 @@ namespace SilverSocialNetwork
         public static MessageSendingView messageSendingView;
         public static UserIncomingMessageView userIncomingMessageView;
         public static UserOutcomingMessageView userOutcomingMessageView;
+        public static FriendService friendService;
+        public static FriendView friendView;
 
         static void Main(string[] args)
         {
@@ -33,6 +35,8 @@ namespace SilverSocialNetwork
             messageSendingView = new MessageSendingView(messageService, userService);
             userIncomingMessageView = new UserIncomingMessageView();
             userOutcomingMessageView = new UserOutcomingMessageView();
+            friendService = new FriendService();
+            friendView = new FriendView(friendService, userService);
 
             while (true)
             {

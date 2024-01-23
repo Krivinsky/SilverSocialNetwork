@@ -15,7 +15,7 @@ namespace SilverSocialNetwork.BLL.Services
             messageRepository = new MessageRepository();
         }
 
-        public IEnumerable<Message> GetIncomingMessagesByUserId(int recipientId)
+        public virtual IEnumerable<Message> GetIncomingMessagesByUserId(int recipientId)
         {
             var messages = new List<Message>();
 
@@ -30,7 +30,7 @@ namespace SilverSocialNetwork.BLL.Services
             return messages;
         }
 
-        public IEnumerable<Message> GetOutcomingMessagesByUserId(int senderId)
+        public virtual IEnumerable<Message> GetOutcomingMessagesByUserId(int senderId)
         {
             var messages = new List<Message>();
 
@@ -54,7 +54,7 @@ namespace SilverSocialNetwork.BLL.Services
                 throw new ArgumentOutOfRangeException();
 
             var findUserEntity = this.userRepository.FindByEmail(messageSendingData.RecipientEmail);
-            if (findUserEntity is null) throw new UserNotFoundException();
+            if (findUserEntity is null) throw new UserNotFoundException("Пользователь с таким почтовым адресом не найден");
 
             var messageEntity = new MessageEntity()
             {
